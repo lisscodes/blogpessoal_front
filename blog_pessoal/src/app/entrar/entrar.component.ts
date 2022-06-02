@@ -19,21 +19,23 @@ export class EntrarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    window.scroll(0,0)
+    window.scroll(0, 0)
   }
 
   entrar() {
-    this.auth.entrar(this.usuarioLogin).subscribe({ next: (resp: UsuarioLogin)=>{
-      this.usuarioLogin = resp
-      environment.token = this.usuarioLogin.token
-      environment.nome = this.usuarioLogin.nome
-      environment.foto = this.usuarioLogin.foto
-      environment.id = this.usuarioLogin.id
-      this.router.navigate(['inicio'])
-      }, erro: erro => {
-      if(erro.status == 401){
-        alert('Usuário ou senha estão incorretos!')
-      }
-  },
-  });
+    this.auth.entrar(this.usuarioLogin).subscribe({
+      next: (resp: UsuarioLogin) => {
+        this.usuarioLogin = resp
+        environment.token = this.usuarioLogin.token
+        environment.nome = this.usuarioLogin.nome
+        environment.foto = this.usuarioLogin.foto
+        environment.id = this.usuarioLogin.id
+        this.router.navigate(['inicio'])
+      }, error: erro => {
+        if (erro.status == 401) {
+          alert('Usuário ou senha estão incorretos!')
+        }
+      },
+    });
+  }
 }
